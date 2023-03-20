@@ -1,21 +1,30 @@
-import express from 'express';
+import express from "express";
 import {
   getRestaurants,
   createRestaurant,
   getRestaurant,
   updateRestaurant,
-  deleteRestaurant
-} from '../controllers/restaurantController.js';
+  deleteRestaurant,
+  getKosherRestaurants,
+  getRestaurantsByCities,
+  getRestaurantByAddress,
+  getRestaurantByCuisine,
+} from "../controllers/restaurantController.js";
 
 const router = express.Router();
 
-router
-  .route('/')
-  .get(getRestaurants)
-  .post(createRestaurant);
+router.route("/").get(getRestaurants).post(createRestaurant);
+
+router.route("/cuisine/:type").get(getRestaurantByCuisine);
+
+router.route("/cities").get(getRestaurantsByCities);
+
+router.route("/kosher").get(getKosherRestaurants);
+
+router.route("/address").get(getRestaurantByAddress);
 
 router
-  .route('/:id')
+  .route("/:id")
   .get(getRestaurant)
   .put(updateRestaurant)
   .delete(deleteRestaurant);
